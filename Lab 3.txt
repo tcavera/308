@@ -1,0 +1,61 @@
+-- Tyler Cavera Lab 3
+
+
+
+-- Query 1
+
+SELECT NAME, CITY
+FROM AGENTS
+WHERE NAME = 'Smith';
+
+--Query 2
+
+SELECT PID, NAME, QUANTITY
+FROM PRODUCTS
+WHERE PRICEUSD > 1.25;
+
+--Query 3
+
+SELECT ORDNO, AID
+FROM ORDERS;
+
+--Query 4
+
+SELECT NAME, CITY
+FROM CUSTOMERS
+WHERE CITY = 'Dallas';
+
+--Query 5
+
+SELECT NAME
+FROM AGENTS
+WHERE CITY != 'New York' 
+AND CITY != 'Newark';
+
+--Query 6
+
+SELECT * 
+FROM PRODUCTS
+WHERE CITY != 'New York'
+AND CITY != 'Newark'
+AND PRICEUSD >= 1.00;
+
+--Query 7
+
+SELECT * 
+FROM ORDERS
+WHERE MON = 'jan' 
+OR MON = 'mar';
+
+--Query 8
+
+SELECT * 
+FROM ORDERS
+WHERE MON = 'feb' 
+AND DOLLARS  < 100.00;
+
+--Query 9
+
+SELECT * 
+FROM ORDERS
+WHERE CID = 'c001';
