@@ -45,7 +45,7 @@ from customers, agents
 where (customers.city = agents.city);
 
 --QUERY 7
---I couldn't figure out how to write  query for this one
+--I couldn't figure out how to write a query for this one
 --using joins instead of subqueries. 
 select name, city
 from customers 
