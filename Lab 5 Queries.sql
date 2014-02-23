@@ -23,12 +23,14 @@ where (o1.aid = o2.aid)
 --QUERY 3
 select name
 from customers
-where cid not in (select cid
-	          from orders);
+where cid not in (select o.cid
+	          from customers c,
+	          orders o
+	          where o.cid = c.cid);
 	         
 --QUERY 4
 select customers.name
-from customers LEFT JOIN orders
+from customers LEFT OUTER JOIN orders
 on (customers.cid = orders.cid)
 where orders.cid IS NULL;
 
@@ -44,12 +46,19 @@ select customers.name as "Customer", agents.name as "Agent", customers.city
 from customers, agents
 where (customers.city = agents.city);
 
+--QUERY 6 ALT (from class)
+select city
+from customers
+	intersect
+select city 
+from agents
+
 --QUERY 7
---I couldn't figure out how to write a query for this one
---using joins instead of subqueries. 
-select name, city
+select customers.name, customers.city
 from customers 
-where city in (select city
-               from products
-               where quantity in (select min(quantity)
-                                  from products));
+where customers.city in (select city
+                         from (select city, sum(products.quantity) as "sumquantity"
+                           from products
+                           group by city) cityQuantity 
+                           order by sumquantity asc
+                           limit 1)
